@@ -1,11 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name='users-home'),
     path('biography/', views.biography, name='users-biography'),
     path('settings/', views.settings, name='users-settings'),
     path('portfolio/', views.portfolio, name='users-portfolio'),
+    path('register/', views.register, name='users-register'),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='users-login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='users-logout'),
     #path('', PostListView.as_view(), name='blog-home'),
     #path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     # this leads to blog/about

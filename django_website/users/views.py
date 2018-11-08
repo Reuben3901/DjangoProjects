@@ -1,6 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from blog.models import Post
+from .forms import UserRegisterForm
+
+#Import our new custom form from forms.py
+# for def register
+#import django default user creation form
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 def index(request):
     context={'posts' : Post.objects.all()}
@@ -17,8 +24,15 @@ def portfolio(request):
     #return HttpResponse('<h1>Blog Home - Latest Posts</h1>')
     return render(request, 'users/portfolio.html', {'title':'Portfolio'})
 
-#import django default user creation form
-from django.contrib.auth.forms import UserCreationForm
 def register(request):
-    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            # Saving the user only needs form.save()
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect('blog-home')
+    else:
+        form = UserRegisterForm()
     return render(request,'users/register.html',{'form':form})
