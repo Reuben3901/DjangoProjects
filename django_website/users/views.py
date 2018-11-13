@@ -8,6 +8,7 @@ from .forms import UserRegisterForm
 #import django default user creation form
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     context={'posts' : Post.objects.all()}
@@ -17,6 +18,7 @@ def index(request):
 def biography(request):
     return render(request, 'users/biography.html', {'title':'Biography'})
 
+@login_required
 def settings(request):
     return render(request, 'users/settings.html', {'title':'Settings'})
 
@@ -36,3 +38,8 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request,'users/register.html',{'form':form})
+
+#Using this with classes is a little bit different
+@login_required
+def profile(request):
+    return render(request,'users/profile.html')

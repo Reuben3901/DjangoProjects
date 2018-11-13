@@ -126,4 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# After logged in, overriding the dafault landing page
 LOGIN_REDIRECT_URL = 'blog-home'
+# Overriding the login route if login_required
+LOGIN_URL = 'users-login'
