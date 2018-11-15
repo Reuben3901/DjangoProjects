@@ -124,7 +124,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Where our medai will be located on the file system
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+# How we publically access the media
+MEDIA_URL = '/media/'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # After logged in, overriding the dafault landing page
 LOGIN_REDIRECT_URL = 'blog-home'

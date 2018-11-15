@@ -2,5 +2,28 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>{{ user.username }}</h1>
+<div class="content-section">
+  <div class="media">
+    <img class="rounded-circle account-img" src="#">
+    <div class="media-body">
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+    </div>
+  </div>
+</div>
+
+{% for pic in pics %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ pic.user }}</a>
+      </div>
+      <p class="article-content">
+        <img src="{{ pic.image.url }}">
+      </p>
+    </div>
+  </article>
+
+{% endfor %}
+
 {% endblock content %}

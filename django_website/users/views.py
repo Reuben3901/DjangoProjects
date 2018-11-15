@@ -9,6 +9,7 @@ from .forms import UserRegisterForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import ProfilePictures
 
 def index(request):
     context={'posts' : Post.objects.all()}
@@ -42,4 +43,5 @@ def register(request):
 #Using this with classes is a little bit different
 @login_required
 def profile(request):
-    return render(request,'users/profile.html')
+    context = { 'pics' : ProfilePictures.objects.all() }
+    return render(request,'users/profile.html', context)
