@@ -25,7 +25,8 @@ def settings(request):
 
 def portfolio(request):
     #return HttpResponse('<h1>Blog Home - Latest Posts</h1>')
-    return render(request, 'users/portfolio.html', {'title':'Portfolio'})
+    context = { 'pics' : ProfilePictures.objects.all() }
+    return render(request, 'users/portfolio.html', context, {'title':'Portfolio'})
 
 def register(request):
     if request.method == 'POST':
@@ -43,5 +44,4 @@ def register(request):
 #Using this with classes is a little bit different
 @login_required
 def profile(request):
-    context = { 'pics' : ProfilePictures.objects.all() }
-    return render(request,'users/profile.html', context)
+    return render(request,'users/profile.html')

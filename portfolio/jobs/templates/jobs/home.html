@@ -37,12 +37,8 @@
 
       <div class="album py-5 bg-light">
         <div class="container">
-
           <div class="row">
-
-
             {% for job in jobs.all %}
-
               <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                   <a href="{% url 'detail' job.id %} ">
@@ -54,7 +50,6 @@
                 </div>
               </div>
             {% endfor %}
-
           </div>
         </div>
       </div>
