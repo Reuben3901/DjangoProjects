@@ -32,6 +32,28 @@ class Profile(models.Model):
 
 class ProfilePictures(models.Model):
     image = models.ImageField(upload_to='profile_pics', null=True, default='profile_pics/default.jpg')
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    # def __str__(self):
+    #     return f'{self.user.username} {self.image}'
+
+'''
+class SidebarPages(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return f'{self.user.username} {self.image}'
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+
+class GalleryPhotos(models.Model):
+    image = models.ImageField(upload_to='profile_pics', null=True, default='profile_pics/default.jpg')
+    user = models.ForeignKey(SidebarPages, on_delete=models.CASCADE)
+    PRIVACY_CHOICES = [('Y', 'Private'), ('N', 'Public')]
+    private = models.CharField(choices=PRIVACY_CHOICES,max_length=1, blank=False, default='N')
+    title = models.CharField(max_length=100)
+    submitter = models.CharField(max_length=100)
+    species = models.CharField(max_length=50)
+    breed = models.CharField(max_length=50, blank=True)
+    description = models.TextField()
+    submission_date = models.DateTimeField()
+    price = models.IntegerField(null=True)
+    vaccinations = models.ManyToManyField('Vaccine', blank=True)
+'''
