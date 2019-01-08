@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Question, Choice
+from .models import Question, Choice, Profile
 
 '''Django will construct a defaul form representation. Will need to use below alt to customize '''
 #admin.site.register(Question)
@@ -36,3 +36,5 @@ admin.site.register(Question, QuestionAdmin)
 
 ''' Creates that annoying choice alone with a dropdown menu to select the question '''
 #admin.site.register(Choice)
+
+admin.site.register(Profile)

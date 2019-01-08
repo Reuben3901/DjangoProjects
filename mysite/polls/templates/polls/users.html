@@ -2,10 +2,47 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
+<h2>Staff</h2>
+  {% if staff %}
+    <ul>
+  {% for user in staff %}
+    <li>{{ user.username }}</li>
+    <li>{{ user.profile }}</li>
+    <li>{{ user.profile.bio }}</li>
+    <li>{{ display_context }}</li>
+    <li>{{ users }}</li>
+  {% endfor %}
+    </ul>
+  {% else %}
+    <p>No staffers are available.</p>
+  {% endif %}
+
+<h2>Non-Staff</h2>
+  {% if non_staff %}
+    <ul>
+  {% for user in non_staff %}
+    <li>{{ user.username }}</li>
+    <li>{{ user.profile }}</li>
+    <li>{{ user.profile.bio }}</li>
+    <li>{{ display_context }}</li>
+    <li>{{ users }}</li>
+  {% endfor %}
+    </ul>
+  {% else %}
+    <p>No non-staffers are available.</p>
+  {% endif %}
+
+<h3>Everbody</h3>
+
+
 {% if object_list %}
   <ul>
 {% for object in object_list %}
   <li>{{ user.username }}</li>
+  <li>{{ user.profile }}</li>
+  <li>{{ user.profile.bio }}</li>
+  <li>{{ display_context }}</li>
+  <li>{{ users }}</li>
 {% endfor %}
   </ul>
 {% else %}

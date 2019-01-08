@@ -119,7 +119,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+# Overriding the login route if login_required
+#LOGIN_URL = 'login'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = '/polls/users'
+LOGIN_URL = 'login'

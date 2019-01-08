@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # def index(request):
@@ -63,6 +65,8 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+# This is only for non-class based views
+@login_required
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -82,7 +86,16 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
     #return HttpResponse("You're voting on question %s." % question_id)
 
-class UsersView(generic.ListView):
+class UsersView(LoginRequiredMixin, generic.ListView):
     ''' ... allows the code to run '''
     model = User
     template_name = "polls/users.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['display_context'] = context
+        context['users'] = User.objects.all()
+        #context['user_list'] = None
+        context['staff'] = [user for user in User.objects.all() if user.is_staff]
+        context['non_staff'] = [user for user in User.objects.all() if not user.is_staff]
+        return context
